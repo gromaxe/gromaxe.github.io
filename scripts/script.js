@@ -5,7 +5,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let snake = [{ x: 10, y: 10 }];
-let food = { x: 15, y: 15 };
+let food = { x: 30, y: 30 };
 let direction = 'right';
 let isPaused = false;
 
