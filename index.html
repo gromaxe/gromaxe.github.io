@@ -1,58 +1,48 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Угадай число</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        input {
-            padding: 10px;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .message {
-            margin-top: 20px;
-            font-size: 20px;
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home Page</title>
+    <!-- You can add links to CSS files here -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Угадай число!</h1>
-    <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
-    <input type="number" id="guess" placeholder="Введите ваше число" />
-    <button onclick="checkGuess()">Угадать</button>
-    <div class="message" id="message"></div>
-
-    <script>
-        const randomNumber = Math.floor(Math.random() * 100) + 1;
-        let attempts = 0;
-
-        function checkGuess() {
-            const userGuess = Number(document.getElementById('guess').value);
-            attempts++;
-
-            let message = '';
-
-            if (userGuess === randomNumber) {
-                message = `Поздравляю! Вы угадали число ${randomNumber} за ${attempts} попыток!`;
-                document.getElementById('guess').disabled = true; // отключаем ввод после победы
-            } else if (userGuess < randomNumber) {
-                message = 'Слишком низко! Попробуйте снова.';
-            } else if (userGuess > randomNumber) {
-                message = 'Слишком высоко! Попробуйте снова.';
-            }
-
-            document.getElementById('message').innerText = message;
-        }
-    </script>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="quiz.html">Quiz</a></li> <!-- Link to the quiz page -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="hero">
+            <h1>Welcome to My Website</h1>
+            <p>This is a sample homepage designed using HTML5 standards.</p>
+        </section>
+        <section id="content">
+            <article>
+                <h2>About This Site</h2>
+                <p>The purpose of this site is to showcase my skills and projects.</p>
+            </article>
+            <aside>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#hero">Back to Top</a></li>
+                    <li><a href="https://example.com">External Resource</a></li>
+                </ul>
+            </aside>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
+    <!-- You can add scripts here -->
+    <script src="scripts.js"></script>
 </body>
 </html>
