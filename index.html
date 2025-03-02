@@ -1,126 +1,75 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ракета и Пинг-Понг</title>
-    <style>
+Конечно, вот пример сайта про ракеты в одном HTML файле. Этот сайт включает в себя основную информацию о принципе работы ракет и предоставляет несколько ссылок на тему ракетной техники.
+
+```html
+
+
+
+    
+    
+    Ракеты: Принцип работы и ссылки
+    
         body {
             background-image: url('https://picsum.photos/2000/1000');
             background-size: cover;
             background-position: center;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            padding: 20px;
+            font-family: Arial, sans-serif;
         }
         
-        #game {
-            position: relative;
-            border: 1px solid white;
+        .container {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            max-width: 800px;
+            margin: auto;
         }
         
-        .rocket {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 50px;
-            color: white;
+        h1 {
+            color: #00698f;
         }
-    </style>
-</head>
-<body>
-    <canvas id="game" width="750" height="585"></canvas>
-    <div class="rocket">🚀</div>
-
-    <script>
-        const canvas = document.getElementById('game');
-        const ctx = canvas.getContext('2d');
-
-        // Параметры мяча
-        let ballX = canvas.width / 2;
-        let ballY = canvas.height / 2;
-        let ballSpeedX = 4;
-        let ballSpeedY = 4;
-        let ballRadius = 8;
-
-        // Параметры ракеток
-        let paddleHeight = 100;
-        let paddleWidth = 10;
-        let paddle1Y = (canvas.height - paddleHeight) / 2;
-        let paddle2Y = (canvas.height - paddleHeight) / 2;
-
-        // Счет
-        let score1 = 0;
-        let score2 = 0;
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'white';
-
-            // Рисуем мяч
-            ctx.beginPath();
-            ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Рисуем ракетки
-            ctx.fillRect(0, paddle1Y, paddleWidth, paddleHeight);
-            ctx.fillRect(canvas.width - paddleWidth, paddle2Y, paddleWidth, paddleHeight);
-
-            // Рисуем счет
-            ctx.font = '24px Arial';
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'top';
-            ctx.fillText(`Счет: ${score1}`, 10, 10);
-            ctx.textAlign = 'right';
-            ctx.fillText(`Счет: ${score2}`, canvas.width - 10, 10);
-
-            // Двигаем мяч
-            ballX += ballSpeedX;
-            ballY += ballSpeedY;
-
-            // Отскок от стенок
-            if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) {
-                ballSpeedY = -ballSpeedY;
-            }
-
-            // Отскок от ракеток
-            if (ballX - ballRadius < paddleWidth && ballY > paddle1Y && ballY < paddle1Y + paddleHeight) {
-                ballSpeedX = -ballSpeedX;
-            } else if (ballX + ballRadius > canvas.width - paddleWidth && ballY > paddle2Y && ballY < paddle2Y + paddleHeight) {
-                ballSpeedX = -ballSpeedX;
-            }
-
-            // Голы
-            if (ballX - ballRadius < 0) {
-                score2++;
-                ballX = canvas.width / 2;
-                ballY = canvas.height / 2;
-            } else if (ballX + ballRadius > canvas.width) {
-                score1++;
-                ballX = canvas.width / 2;
-                ballY = canvas.height / 2;
-            }
-
-            // Управление ракетками
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'w') {
-                    paddle1Y -= 20;
-                } else if (e.key === 's') {
-                    paddle1Y += 20;
-                } else if (e.key === 'ArrowUp') {
-                    paddle2Y -= 20;
-                } else if (e.key === 'ArrowDown') {
-                    paddle2Y += 20;
-                }
-            });
-
-            requestAnimationFrame(draw);
+        
+        a {
+            color: #00698f;
+            text-decoration: none;
         }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    
 
-        draw();
-    </script>
-</body>
-</html>
+
+    
+        Ракеты: Принцип работы и ссылки
+        
+        Принцип работы ракеты
+        Ракета — это летательный аппарат, который движется за счёт реактивной тяги, возникающей при отбрасывании части своей массы. Основной принцип работы ракеты основан на третьем законе Ньютона: каждое действие имеет равную и противоположную реакцию. Ракетный двигатель выбрасывает горячие газы в одном направлении, что вызывает реакцию в противоположном направлении, толкая ракету вперёд.
+        
+        Основные компоненты ракеты
+        
+            Двигательная установка: Использует твёрдое, жидкое или гибридное топливо для создания тяги.
+            Система управления: Обеспечивает стабильность и управление ракетой на заданной траектории.
+            Полезная нагрузка: Может включать боеголовки, космические аппараты или другие грузы.
+        
+        
+        Типы ракет
+        
+            Одноступенчатые: Используются для коротких расстояний.
+            Многоступенчатые: Позволяют достичь больших скоростей и высот.
+        
+        
+        Дополнительные ссылки
+        
+            BrahMos.com — Устройство ракеты и принцип работы.
+            Znanie.Russia — Ракета: что это такое, виды, устройство и принцип работы.
+            Wikipedia — Ракета.
+            Naked Science — Как это работает: космические ракеты.
+        
+    
+
+
+```
+
+Этот сайт включает в себя основную информацию о ракетах и предоставляет несколько ссылок на тему ракетной техники. Вы можете настроить стили и содержание по своему усмотрению.
