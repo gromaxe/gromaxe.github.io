@@ -3,36 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <title>Ракета и Пинг-Понг</title>
+    <style>
+        body {
+            background-image: url('https://picsum.photos/2000/1000');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        #game {
+            position: relative;
+            border: 1px solid white;
+        }
+        
+        .rocket {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">Обо мне</a></li>
-                <li><a href="projects.html">Проекты</a></li>
-                <li><a href="contact.html">Контакты</a></li>
-                <li><a href="quiz.html">Викторина</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <canvas id="snake-game"></canvas>
-        <section class="intro">
-            <h1>Добро пожаловать на мой сайт</h1>
-            <p>Тут будет разное-интересное</p>
-            <figure>
-                <img src="images/cat_meme.png" alt="Кот мем" title="Кот мем" style="width: 16.67%; height: auto;">
-                <figcaption>Рисунок 1: Кот мем</figcaption>
-            </figure>
-            <a href="projects.html" class="btn">Посмотреть мои работы</a>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Ваше имя</p>
-    </footer>
-    <script src="scripts/script.js"></script>
+    <canvas id="game" width="750" height="585"></canvas>
+    <div class="rocket">🚀</div>
+
+    <script>
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+
+        // Параметры мяча
+        let ballX = canvas.width / 2;
+        let ballY = canvas.height / 2;
+        let ballSpeedX = 4;
+        let ballSpeedY = 4;
+        let ballRadius = 8;
+
+        // Параметры ракеток
+        let paddleHeight = 100;
+        let paddleWidth = 10;
+        let paddle1Y = (canvas.height - paddleHeight) / 2;
+        let paddle2Y = (canvas.height - paddleHeight) / 2;
+
+        // Счет
+        let score1 = 0;
+        let score2 = 0;
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+
+            // Рисуем мяч
+            ctx.beginPath();
+            ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Рисуем ракетки
+            ctx.fillRect(0, paddle1Y, paddleWidth, paddleHeight);
+            ctx.fillRect(canvas.width - paddleWidth, paddle2Y, paddleWidth, paddleHeight);
+
+            // Рисуем счет
+            ctx.font = '24px Arial';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            ctx.fillText(`Счет: ${score1}`, 10, 10);
+            ctx.textAlign = 'right';
+            ctx.fillText(`Счет: ${score2}`, canvas.width - 10, 10);
+
+            // Двигаем мяч
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
+            // Отскок от стенок
+            if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) {
+                ballSpeedY = -ballSpeedY;
+            }
+
+            // Отскок от ракеток
+            if (ballX - ballRadius < paddleWidth && ballY > paddle1Y && ballY < paddle1Y + paddleHeight) {
+                ballSpeedX = -ballSpeedX;
+            } else if (ballX + ballRadius > canvas.width - paddleWidth && ballY > paddle2Y && ballY < paddle2Y + paddleHeight) {
+                ballSpeedX = -ballSpeedX;
+            }
+
+            // Голы
+            if (ballX - ballRadius < 0) {
+                score2++;
+                ballX = canvas.width / 2;
+                ballY = canvas.height / 2;
+            } else if (ballX + ballRadius > canvas.width) {
+                score1++;
+                ballX = canvas.width / 2;
+                ballY = canvas.height / 2;
+            }
+
+            // Управление ракетками
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'w') {
+                    paddle1Y -= 20;
+                } else if (e.key === 's') {
+                    paddle1Y += 20;
+                } else if (e.key === 'ArrowUp') {
+                    paddle2Y -= 20;
+                } else if (e.key === 'ArrowDown') {
+                    paddle2Y += 20;
+                }
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
 </body>
 </html>
